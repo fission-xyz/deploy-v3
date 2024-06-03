@@ -1,7 +1,7 @@
 import fs from "fs";
 import hre, { ethers } from "hardhat";
 
-import { UniV3DeploymentConfig, V3CoreDeploymentParams } from "@types";
+import { UniV3DeploymentConfig, V3CoreDeploymentParams, V3PeripheryDeploymentParams } from "@types";
 
 export function getV3CoreDeploymentParams(): V3CoreDeploymentParams {
   const config: UniV3DeploymentConfig = parseConfig();
@@ -13,6 +13,22 @@ export function getV3CoreDeploymentParams(): V3CoreDeploymentParams {
   return {
     envs,
     network: hre.network.name,
+  };
+}
+
+export function getV3PeripheryDeploymentParams(factoryAddress: string): V3PeripheryDeploymentParams {
+  const config: UniV3DeploymentConfig = parseConfig();
+
+  const envs: Record<string, string> = {
+    V3_FACTORY_ADDRESS: factoryAddress,
+    WETH9_ADDRESS: config.weth9Address,
+    NATIVE_CURRENCY_LABEL: config.nativeCurrencySymbol,
+    FINAL_PROXY_ADMIN_OWNER: config.descriptorProxyAdminOwner,
+  };
+
+  return {
+    network: hre.network.name,
+    envs,
   };
 }
 
@@ -29,9 +45,20 @@ export function parseConfig(): UniV3DeploymentConfig {
 }
 
 function validateConfig(config: UniV3DeploymentConfig): UniV3DeploymentConfig {
-  if (!config.factoryOwner || !ethers.isAddress(config.factoryOwner) || config.factoryOwner == ethers.ZeroAddress) {
-    throw new Error(`Invalid factoryOwner address: ${config.factoryOwner}`);
-  }
+  console.assert(isAddressValid(config.factoryOwner), `Invalid factoryOwner address: ${config.factoryOwner}`);
+  console.assert(isAddressValid(config.weth9Address), `Invalid weth9Address address: ${config.weth9Address}`);
+  console.assert(
+    isAddressValid(config.descriptorProxyAdminOwner),
+    `Invalid descriptorProxyAdminOwner address: ${config.descriptorProxyAdminOwner}`,
+  );
+  console.assert(
+    config.nativeCurrencySymbol.length > 0,
+    `Invalid nativeCurrencySymbol: ${config.nativeCurrencySymbol}`,
+  );
 
   return config;
+}
+
+function isAddressValid(address: string | undefined): boolean {
+  return !(!address || !ethers.isAddress(address) || address == ethers.ZeroAddress);
 }

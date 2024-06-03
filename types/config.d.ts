@@ -15,6 +15,9 @@
  */
 export type UniV3DeploymentConfig = {
   factoryOwner: string;
+  weth9Address: string;
+  nativeCurrencySymbol: string;
+  descriptorProxyAdminOwner: string;
 };
 
 export type CommonParams = {
@@ -24,6 +27,20 @@ export type CommonParams = {
 
 export type V3CoreDeploymentParams = CommonParams;
 
+export type V3PeripheryDeploymentParams = CommonParams;
+
 export type V3CoreDeploymentResult = {
   factoryAddress: string;
+};
+
+export type V3PeripheryDeploymentResult = {
+  uniswapMulticall: string;
+  proxyAdmin: string;
+  tickLens: string;
+  nftDescriptor: string;
+  nonfungibleTokenPositionDescriptor: string;
+  descriptorProxyAddress: string;
+  nonFungibleTokenPositionManager: string;
+  v3Migrator: string;
+  quoterV2: string;
 };

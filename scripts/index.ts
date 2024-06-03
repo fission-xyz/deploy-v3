@@ -1,7 +1,8 @@
-import { deployV3Core } from "./deployment";
+import { deployV3Core, deployV3Periphery } from "./deployment";
 
 async function main() {
-  await deployV3Core();
+  const v3CoreDeploymentResult = await deployV3Core();
+  await deployV3Periphery(v3CoreDeploymentResult.factoryAddress);
 }
 
 main()
