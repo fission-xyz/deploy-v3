@@ -3,6 +3,9 @@ lib
 report
 .env
 .DS_Store
+/configs
+!/configs/config.example.json
+cache_hardhat
 
 # Compiler files
 cache
