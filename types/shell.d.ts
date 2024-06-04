@@ -3,4 +3,5 @@ export type MigrationOptions = {
   network: string;
   envs: Record<string, string>;
   verify?: boolean;
+  continue?: boolean;
 };

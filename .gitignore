@@ -6,6 +6,7 @@ report
 /configs
 !/configs/config.example.json
 cache_hardhat
+scripts/helpers
 
 # Compiler files
 cache

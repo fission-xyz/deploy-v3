@@ -12,6 +12,10 @@
  * - setOwner
  * - enableFeeAmount
  * - createPool (TODO)
+ *
+ * @property {string} weth9Address - The address of the WETH9 contract on the network
+ * @property {string} nativeCurrencySymbol - The symbol of the native currency on the network
+ * @property {string} descriptorProxyAdminOwner - The address of the owner of the descriptor proxy admin
  */
 export type UniV3DeploymentConfig = {
   factoryOwner: string;

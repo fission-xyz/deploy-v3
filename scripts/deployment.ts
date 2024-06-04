@@ -22,6 +22,8 @@ export async function deployV3Core(): Promise<V3CoreDeploymentResult> {
     cwd: EXPECTED_V3_CORE_PATH,
     envs: params.envs,
     network: params.network,
+    continue: !!process.env.CONTINUE,
+    verify: !!process.env.VERIFY,
   });
 
   return {
@@ -36,6 +38,8 @@ export async function deployV3Periphery(factoryAddress?: string): Promise<V3Peri
     cwd: EXPECTED_V3_PERIPHERY_PATH,
     envs: params.envs,
     network: params.network,
+    continue: !!process.env.CONTINUE,
+    verify: !!process.env.VERIFY,
   });
 
   return getUniV3PeripheryAddresses();
@@ -50,6 +54,8 @@ export async function deployUniversalRouter(factoryAddress?: string): Promise<Un
     cwd: EXPECTED_UNIVERSAL_ROUTER_PATH,
     envs: params.envs,
     network: params.network,
+    continue: !!process.env.CONTINUE,
+    verify: !!process.env.VERIFY,
   });
 
   return {

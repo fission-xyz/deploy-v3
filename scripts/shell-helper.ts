@@ -19,6 +19,10 @@ export async function runMigration(options: MigrationOptions): Promise<void> {
     args.push("--verify");
   }
 
+  if (options.continue) {
+    args.push("--continue");
+  }
+
   createEnv(options.cwd, options.envs);
 
   spawnSync(command, args, { stdio: "inherit", env: process.env });
