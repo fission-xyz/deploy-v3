@@ -29,6 +29,8 @@ export type V3CoreDeploymentParams = CommonParams;
 
 export type V3PeripheryDeploymentParams = CommonParams;
 
+export type UniversalRouterDeploymentParams = CommonParams;
+
 export type V3CoreDeploymentResult = {
   factoryAddress: string;
 };
@@ -43,4 +45,8 @@ export type V3PeripheryDeploymentResult = {
   nonFungibleTokenPositionManager: string;
   v3Migrator: string;
   quoterV2: string;
+};
+
+export type UniversalRouterDeploymentResult = {
+  universalRouterAddress: string;
 };

@@ -5,6 +5,7 @@ import { V3PeripheryDeploymentResult } from "@types";
 import {
   DESCRIPTOR_PROXY_ADMIN_KEY,
   DESCRIPTOR_PROXY_KEY,
+  EXPECTED_UNIVERSAL_ROUTER_PATH,
   EXPECTED_V3_CORE_PATH,
   EXPECTED_V3_PERIPHERY_PATH,
   FACTORY_KEY,
@@ -14,6 +15,7 @@ import {
   QUOTER_V2_KEY,
   TICK_LENS_KEY,
   UNI_V3_MULTICALL_KEY,
+  UNIVERSAL_ROUTER_KEY,
   V3_MIGRATOR_KEY,
 } from "./constants";
 
@@ -73,4 +75,16 @@ export function getUniV3PeripheryAddresses(): V3PeripheryDeploymentResult {
     v3Migrator,
     quoterV2,
   };
+}
+
+export function getUniversalRouterAddress(): string {
+  const migrateStorageData = JSON.parse(
+    fs.readFileSync(`${EXPECTED_UNIVERSAL_ROUTER_PATH}/cache/.migrate.storage.json`),
+  );
+
+  const contractAddress = migrateStorageData.transactions[UNIVERSAL_ROUTER_KEY].contractAddress;
+
+  console.assert(contractAddress, "UniversalRouter contract address not found in the Hardhat Migrate storage file.");
+
+  return contractAddress;
 }

@@ -1,7 +1,12 @@
 import fs from "fs";
 import hre, { ethers } from "hardhat";
 
-import { UniV3DeploymentConfig, V3CoreDeploymentParams, V3PeripheryDeploymentParams } from "@types";
+import {
+  UniV3DeploymentConfig,
+  UniversalRouterDeploymentParams,
+  V3CoreDeploymentParams,
+  V3PeripheryDeploymentParams,
+} from "@types";
 
 export function getV3CoreDeploymentParams(): V3CoreDeploymentParams {
   const config: UniV3DeploymentConfig = parseConfig();
@@ -24,6 +29,20 @@ export function getV3PeripheryDeploymentParams(factoryAddress: string): V3Periph
     WETH9_ADDRESS: config.weth9Address,
     NATIVE_CURRENCY_LABEL: config.nativeCurrencySymbol,
     FINAL_PROXY_ADMIN_OWNER: config.descriptorProxyAdminOwner,
+  };
+
+  return {
+    network: hre.network.name,
+    envs,
+  };
+}
+
+export function getUniversalRouterDeploymentParams(factoryAddress: string): UniversalRouterDeploymentParams {
+  const config: UniV3DeploymentConfig = parseConfig();
+
+  const envs: Record<string, string> = {
+    V3_FACTORY_ADDRESS: factoryAddress,
+    WETH9_ADDRESS: config.weth9Address,
   };
 
   return {
