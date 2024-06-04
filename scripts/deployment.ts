@@ -5,6 +5,7 @@ import { UniversalRouterDeploymentResult, V3CoreDeploymentResult, V3PeripheryDep
 import { EXPECTED_UNIVERSAL_ROUTER_PATH, EXPECTED_V3_CORE_PATH, EXPECTED_V3_PERIPHERY_PATH } from "./constants";
 
 import { runMigration } from "./shell-helper";
+import { validatePoolInitCodeHash } from "./validation";
 import { getUniV3FactoryAddress, getUniV3PeripheryAddresses, getUniversalRouterAddress } from "./migration-parser";
 import {
   getUniversalRouterDeploymentParams,
@@ -42,6 +43,8 @@ export async function deployV3Periphery(factoryAddress?: string): Promise<V3Peri
 
 export async function deployUniversalRouter(factoryAddress?: string): Promise<UniversalRouterDeploymentResult> {
   const params = getUniversalRouterDeploymentParams(factoryAddress ? factoryAddress : getUniV3FactoryAddress());
+
+  await validatePoolInitCodeHash();
 
   await runMigration({
     cwd: EXPECTED_UNIVERSAL_ROUTER_PATH,
