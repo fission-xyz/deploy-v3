@@ -6,6 +6,15 @@ async function main() {
   await deployUniversalRouter(v3CoreDeploymentResult.factoryAddress);
 }
 
+const assert = (condition: any, ...args: any) => {
+  if (!condition) {
+    console.error(...args);
+    process.exit(1);
+  }
+};
+
+console.assert = assert;
+
 main()
   .then(() => process.exit(0))
   .catch((e) => {

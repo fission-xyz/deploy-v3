@@ -24,5 +24,8 @@ export async function validatePoolInitCodeHash(): Promise<void> {
   // 4. Compare init code hash with the one stored in default.config.json in Universal Router deployment script
   const config = JSON.parse(fs.readFileSync(`${EXPECTED_UNIVERSAL_ROUTER_PATH}/deploy/default.config.json`, "utf8"));
 
-  console.assert(config.poolInitCodeHash == initCodeHash, "UniswapV3Pool init code hash mismatch");
+  console.assert(
+    config.poolInitCodeHash == initCodeHash,
+    `UniswapV3Pool init code hash mismatch. New: ${initCodeHash}`,
+  );
 }
