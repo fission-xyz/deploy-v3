@@ -2,7 +2,7 @@
 
 # Installation commands
 
-install:; make forge-install && npm install && make install-dependencies
+install:; make forge-install && yarn install && make install-dependencies
 
 forge-install:
 	rm -rf lib \
@@ -19,6 +19,6 @@ install-dependencies:
 
 lint-fix:; make lint-ts-fix && make lint-json-fix
 
-lint-json-fix:; npx prettier --write "./**/*.json"
+lint-json-fix:; yarn prettier --write "./**/*.json"
 
-lint-ts-fix:; npx prettier --write "./**/*.ts"
+lint-ts-fix:; yarn prettier --write "./**/*.ts"

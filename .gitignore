@@ -6,7 +6,6 @@ report
 /configs
 !/configs/config.example.json
 cache_hardhat
-scripts/helpers
 
 # Compiler files
 cache
@@ -23,6 +22,3 @@ lcov.info
 
 # Typechain generated files
 generated-types
-
-# Dotenv file
-.env

@@ -1,12 +1,13 @@
 import fs from "fs";
+import path from "path";
 import { spawnSync } from "child_process";
 
 import { MigrationOptions } from "@types";
 
-import { CACHE_FOLDER } from "./constants";
+import { CACHE_FOLDER_NAME } from "./constants";
 
 export async function runMigration(options: MigrationOptions): Promise<void> {
-  const expectedCachePath: string = `${options.cwd}/${CACHE_FOLDER}`;
+  const expectedCachePath: string = path.resolve(options.cwd, CACHE_FOLDER_NAME);
 
   if (!fs.existsSync(expectedCachePath)) {
     fs.mkdirSync(expectedCachePath, { recursive: true });

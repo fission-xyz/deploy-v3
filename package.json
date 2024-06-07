@@ -6,7 +6,7 @@
   "description": "",
   "scripts": {
     "prepare": "husky",
-    "generate-types": "typechain --discriminate-types --target ethers-v6 --out-dir './scripts/helpers/bindings' './scripts/helpers/abi/*.json'"
+    "generate-types": "typechain --discriminate-types --target ethers-v6 --out-dir 'scripts/examples/bindings' 'scripts/examples/abi/*.json'"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-ethers": "^3.0.6",

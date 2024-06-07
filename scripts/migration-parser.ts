@@ -1,14 +1,17 @@
 import fs from "fs";
+import path from "path";
 
 import { V3PeripheryDeploymentResult } from "@types";
 
 import {
+  CACHE_FOLDER_NAME,
   DESCRIPTOR_PROXY_ADMIN_KEY,
   DESCRIPTOR_PROXY_KEY,
   EXPECTED_UNIVERSAL_ROUTER_PATH,
   EXPECTED_V3_CORE_PATH,
   EXPECTED_V3_PERIPHERY_PATH,
   FACTORY_KEY,
+  MIGRATE_STORAGE_FILE,
   NFT_DESCRIPTOR_KEY,
   NFT_POSITION_DESCRIPTOR_KEY,
   NFT_POSITION_MANAGER_KEY,
@@ -20,7 +23,9 @@ import {
 } from "./constants";
 
 export function getUniV3FactoryAddress(): string {
-  const migrateStorageData = JSON.parse(fs.readFileSync(`${EXPECTED_V3_CORE_PATH}/cache/.migrate.storage.json`));
+  const migrateStorageData = JSON.parse(
+    fs.readFileSync(path.resolve(EXPECTED_V3_CORE_PATH, CACHE_FOLDER_NAME, MIGRATE_STORAGE_FILE)),
+  );
 
   const contractAddress = migrateStorageData.transactions[FACTORY_KEY].contractAddress;
 
@@ -30,7 +35,9 @@ export function getUniV3FactoryAddress(): string {
 }
 
 export function getUniV3PeripheryAddresses(): V3PeripheryDeploymentResult {
-  const migrateStorageData = JSON.parse(fs.readFileSync(`${EXPECTED_V3_PERIPHERY_PATH}/cache/.migrate.storage.json`));
+  const migrateStorageData = JSON.parse(
+    fs.readFileSync(path.resolve(EXPECTED_V3_PERIPHERY_PATH, CACHE_FOLDER_NAME, MIGRATE_STORAGE_FILE)),
+  );
 
   const uniswapMulticall = migrateStorageData.transactions[UNI_V3_MULTICALL_KEY].contractAddress;
   const descriptorProxyAdmin = migrateStorageData.transactions[DESCRIPTOR_PROXY_ADMIN_KEY].contractAddress;
@@ -79,7 +86,7 @@ export function getUniV3PeripheryAddresses(): V3PeripheryDeploymentResult {
 
 export function getUniversalRouterAddress(): string {
   const migrateStorageData = JSON.parse(
-    fs.readFileSync(`${EXPECTED_UNIVERSAL_ROUTER_PATH}/cache/.migrate.storage.json`),
+    fs.readFileSync(path.resolve(EXPECTED_UNIVERSAL_ROUTER_PATH, CACHE_FOLDER_NAME, MIGRATE_STORAGE_FILE)),
   );
 
   const contractAddress = migrateStorageData.transactions[UNIVERSAL_ROUTER_KEY].contractAddress;

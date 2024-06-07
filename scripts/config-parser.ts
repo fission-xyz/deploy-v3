@@ -1,4 +1,5 @@
 import fs from "fs";
+import path from "path";
 import hre, { ethers } from "hardhat";
 
 import {
@@ -52,7 +53,7 @@ export function getUniversalRouterDeploymentParams(factoryAddress: string): Univ
 }
 
 export function parseConfig(): UniV3DeploymentConfig {
-  const expectedConfigName: string = `configs/${hre.network.name}.config.json`;
+  const expectedConfigName: string = path.resolve("configs", `${hre.network.name}.config.json`);
 
   if (!fs.existsSync(expectedConfigName)) {
     throw new Error(`Expected config file ${expectedConfigName} not found`);
