@@ -6,7 +6,7 @@ import { CurrencyAmount, Percent, Token, TradeType } from "@uniswap/sdk-core";
 
 import { Trade as V2Trade } from "@uniswap/v2-sdk";
 
-import { SwapRouter, UNIVERSAL_ROUTER_ADDRESS } from "@uniswap/universal-router-sdk";
+import { SwapRouter } from "@uniswap/universal-router-sdk";
 
 import { MixedRouteTrade, Trade as RouterTrade } from "@uniswap/router-sdk";
 import {
@@ -22,14 +22,11 @@ import {
 
 import { CurrentConfig, initPoolCodeHash } from "./config/uni-config";
 
-import { UniswapV3Pool__factory, UniversalRouter__factory } from "./bindings";
 import { getTokenTransferApproval, permitToken } from "./utils";
-import * as process from "node:process";
+import { UniswapV3Pool__factory, UniversalRouter__factory } from "./bindings";
 
 async function getPool(tokenA: Token, tokenB: Token, feeAmount: FeeAmount) {
   const signer = await ethers.provider.getSigner();
-
-  UNIVERSAL_ROUTER_ADDRESS;
 
   const [token0, token1] = tokenA.sortsBefore(tokenB) ? [tokenA, tokenB] : [tokenB, tokenA];
 

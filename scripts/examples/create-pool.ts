@@ -5,8 +5,9 @@ import { computePoolAddress } from "@uniswap/v3-sdk";
 
 import { CurrentConfig, initPoolCodeHash } from "./config/uni-config";
 
-import { UniswapV3Factory__factory, UniswapV3Pool__factory } from "./bindings";
 import { encodePriceSqrt } from "./conversion";
+
+import { UniswapV3Factory__factory, UniswapV3Pool__factory } from "./bindings";
 
 async function createPool(tokenA: Token, tokenB: Token) {
   const signer = await ethers.provider.getSigner();

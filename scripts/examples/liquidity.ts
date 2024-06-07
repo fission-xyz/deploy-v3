@@ -3,7 +3,7 @@ import { ethers } from "hardhat";
 import { CurrencyAmount, Percent, Token } from "@uniswap/sdk-core";
 import { computePoolAddress, MintOptions, nearestUsableTick, Pool, Position } from "@uniswap/v3-sdk";
 
-import { UniswapV3Pool__factory, NonfungiblePositionManager__factory, ERC20__factory } from "./bindings";
+import { UniswapV3Pool__factory, NonfungiblePositionManager__factory } from "./bindings";
 
 import { CurrentConfig, initPoolCodeHash } from "./config/uni-config";
 

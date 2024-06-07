@@ -5,6 +5,7 @@ import { ContractTransactionReceipt } from "ethers";
 import { Token } from "@uniswap/sdk-core";
 
 import { ERC20__factory, Permit2__factory } from "./bindings";
+
 import { CurrentConfig } from "./config/uni-config";
 
 export async function getTokenTransferApproval(

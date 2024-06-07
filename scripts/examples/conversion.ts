@@ -1,5 +1,5 @@
-import { BigNumberish } from "ethers";
 import bn from "bignumber.js";
+import { BigNumberish } from "ethers";
 
 export function fromReadableAmount(amount: number, decimals: number): bigint {
   const extraDigits = Math.pow(10, countDecimals(amount));
