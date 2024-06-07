@@ -11,7 +11,7 @@
  * This address will be allowed to call following functions on the Uniswap V3 factory:
  * - setOwner
  * - enableFeeAmount
- * - createPool (TODO)
+ * - createPool
  *
  * @property {string} weth9Address - The address of the WETH9 contract on the network
  * @property {string} nativeCurrencySymbol - The symbol of the native currency on the network
