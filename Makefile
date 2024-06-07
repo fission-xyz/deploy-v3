@@ -2,7 +2,7 @@
 
 # Installation commands
 
-install:; make forge-install && yarn install && make install-dependencies
+install:; make forge-install && yarn install && make install-dependencies && yarn generate-types
 
 forge-install:
 	rm -rf lib \
