@@ -40,3 +40,7 @@ Also, you could set up contract verification on Etherscan by adding the `VERIFY=
 ```bash
 VERIFY=true yarn hardhat run ./scripts/index.ts --network sepolia
 ```
+
+## Graph Deployment 
+
+To deploy the Uni V3 subgraph, please refer to the [Uni V3 subgraph deployment scripts](https://github.com/micro-capital/v3-subgraph?tab=readme-ov-file#uniswap-v3-subgraph)
