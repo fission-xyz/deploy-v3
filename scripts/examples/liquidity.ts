@@ -9,7 +9,6 @@ import { CurrentConfig, initPoolCodeHash } from "./config/uni-config";
 
 import { encodePriceSqrt, fromReadableAmount } from "./conversion";
 import { getTokenTransferApproval } from "./utils";
-import { formatEther } from "ethers/src.ts/utils/units";
 
 interface PoolInfo {
   token0: string;
@@ -170,9 +169,9 @@ export async function mintPosition(): Promise<any | null> {
 }
 
 export async function addLiquidity(): Promise<void> {
-  await mintPosition();
+  const receipt = await mintPosition();
 
-  console.info("Liquidity added successfully!");
+  console.info("Liquidity added successfully! Transaction hash:", receipt.hash);
 }
 
 addLiquidity()

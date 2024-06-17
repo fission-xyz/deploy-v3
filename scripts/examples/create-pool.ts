@@ -14,6 +14,8 @@ async function createPool(tokenA: Token, tokenB: Token) {
 
   const [token0, token1] = tokenA.sortsBefore(tokenB) ? [tokenA, tokenB] : [tokenB, tokenA];
 
+  console.info(`Creating pool for tokens ${token0.address} and ${token1.address}`);
+
   const currentPoolAddress = computePoolAddress({
     factoryAddress: CurrentConfig.factoryAddress,
     tokenA: token0,
@@ -33,9 +35,13 @@ async function createPool(tokenA: Token, tokenB: Token) {
     "Pool address does not match expected address",
   );
 
+  console.info(`Pool created at ${currentPoolAddress}`);
+
   const pool = UniswapV3Pool__factory.connect(currentPoolAddress, signer as any);
 
-  await pool.initialize(encodePriceSqrt(1, 1));
+  await pool.initialize(encodePriceSqrt(1000, 1000));
+
+  console.info(`Pool initialized with sqrt price of 1000`);
 }
 
 createPool(CurrentConfig.tokens.token0, CurrentConfig.tokens.token1)
