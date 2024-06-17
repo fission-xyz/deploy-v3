@@ -1,8 +1,8 @@
 import { Token } from "@uniswap/sdk-core";
 import { FeeAmount } from "@uniswap/v3-sdk";
 
-const tokenA = "0x09307ff8d7886314Af1BbCb5Db6C450E25b35F6E";
-const tokenB = "0x5F2a500030Dd6741b0e7E67f73C306B279c8309B";
+const tokenA = "0x2e2e24daeeBA50075bc27701E623e5bbc6cE79E9";
+const tokenB = "0x7A217b0a0BcdC0d6b7ABB092d22A0a02F845Aa21";
 
 export const initPoolCodeHash = "0xe34f199b19b2b4f47f68442619d555527d244f78a3297ea89325f843f87b8b54";
 
@@ -22,16 +22,16 @@ export interface ExampleConfig {
     poolFee: FeeAmount;
   };
 }
-export const SepoliaChainId = 11155111;
+export const TokenChainId = 80002;
 
-export const TokenA = new Token(SepoliaChainId, tokenA, 18, "Token1", "Token1");
+export const TokenA = new Token(TokenChainId, tokenA, 18, "Token1", "Token1");
 
-export const TokenB = new Token(SepoliaChainId, tokenB, 18, "Token2", "Token2");
+export const TokenB = new Token(TokenChainId, tokenB, 18, "Token2", "Token2");
 
 export const CurrentConfig: ExampleConfig = {
-  factoryAddress: "0xdEF0B711d89aE4865658a217391D651213c6acFd",
-  managerAddress: "0x8974307631098fB33A708A8e1FA471C3201183b7",
-  universalRouterAddress: "0x1190815f8bB87F53Afec359D80F4fdC2b518Ec9F",
+  factoryAddress: "0x7386bC7020013EC9D67c09Bb55c6a6a2fF7f2ea4",
+  managerAddress: "0x4F9Fd9652FfA0B2Ff1D2413dA7Cd0403AC626aED",
+  universalRouterAddress: "0x238da5Fb56c2148b3D622243d06b9a6d6858aB4a",
   permit2: "0x000000000022D473030F116dDEE9F6B43aC78BA3",
   tokens: {
     token0: TokenA,

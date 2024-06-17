@@ -38,8 +38,6 @@ async function getPool(tokenA: Token, tokenB: Token, feeAmount: FeeAmount) {
     initCodeHashManualOverride: initPoolCodeHash,
   });
 
-  console.log("currentPoolAddress", currentPoolAddress);
-
   const poolContract = UniswapV3Pool__factory.connect(currentPoolAddress, signer as any);
 
   let liquidity = await poolContract.liquidity();
@@ -103,14 +101,20 @@ function swapOptions(recipient: string, options: any) {
 export async function swap(): Promise<void> {
   const signer = await ethers.provider.getSigner();
 
+  console.info(`Approving tokens to Universal Router: ${CurrentConfig.universalRouterAddress} via Permit2`);
+
   await permitToken(CurrentConfig.tokens.token0, CurrentConfig.universalRouterAddress);
   await permitToken(CurrentConfig.tokens.token1, CurrentConfig.universalRouterAddress);
+
+  console.info(`Approving tokens to Permit2: ${CurrentConfig.universalRouterAddress}`);
 
   const approvePermit1 = await getTokenTransferApproval(CurrentConfig.permit2, CurrentConfig.tokens.token0);
   const approvePermit2 = await getTokenTransferApproval(CurrentConfig.permit2, CurrentConfig.tokens.token1);
 
   console.assert(approvePermit1, "approvePermit1 failed");
   console.assert(approvePermit2, "approvePermit2 failed");
+
+  console.info(`Successfully approved tokens!`);
 
   const pool = await getPool(CurrentConfig.tokens.token0, CurrentConfig.tokens.token1, CurrentConfig.tokens.poolFee);
 
@@ -122,6 +126,10 @@ export async function swap(): Promise<void> {
     TradeType.EXACT_INPUT,
   );
 
+  console.info(
+    `Trading ${ethers.formatEther(inputToken).toString()} ${CurrentConfig.tokens.token0.symbol} for ${trade.outputAmount.toExact()} ${CurrentConfig.tokens.token1.symbol}`,
+  );
+
   const routerTrade = buildTrade([trade]);
 
   const opts = swapOptions(await signer.getAddress(), {});
@@ -130,7 +138,7 @@ export async function swap(): Promise<void> {
 
   const router = UniversalRouter__factory.connect(CurrentConfig.universalRouterAddress, signer as any);
 
-  console.log(params);
+  console.info(`Swapping tokens via Universal Router: ${CurrentConfig.universalRouterAddress}`);
 
   const receipt = await (
     await signer.sendTransaction({
@@ -140,7 +148,7 @@ export async function swap(): Promise<void> {
     })
   ).wait();
 
-  console.log(receipt);
+  console.info(`Successfully swapped tokens! Transaction hash: ${receipt!.hash}`);
 }
 
 swap()
