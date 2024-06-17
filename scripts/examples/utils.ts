@@ -17,8 +17,6 @@ export async function getTokenTransferApproval(
   try {
     const tokenContract = ERC20__factory.connect(token.address, signer);
 
-    console.log("spender", spender);
-
     return await (await tokenContract.approve(spender, 2n ** 160n)).wait();
   } catch (e) {
     console.error(e);
