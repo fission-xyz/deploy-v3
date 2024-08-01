@@ -38,7 +38,7 @@ export const CurrentConfig: ExampleConfig = {
     token0Amount: 1000,
     token1: TokenB,
     token1Amount: 1000,
-    poolFee: FeeAmount.LOWEST,
+    poolFee: FeeAmount.HIGH,
   },
 };
 

@@ -12,6 +12,8 @@ import { UniswapV3Factory__factory, UniswapV3Pool__factory } from "./bindings";
 async function createPool(tokenA: Token, tokenB: Token) {
   const signer = await ethers.provider.getSigner();
 
+  console.log(`Signer address: ${await signer.getAddress()}`);
+
   const [token0, token1] = tokenA.sortsBefore(tokenB) ? [tokenA, tokenB] : [tokenB, tokenA];
 
   console.info(`Creating pool for tokens ${token0.address} and ${token1.address}`);
