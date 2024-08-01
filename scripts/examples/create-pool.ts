@@ -39,9 +39,10 @@ async function createPool(tokenA: Token, tokenB: Token) {
 
   const pool = UniswapV3Pool__factory.connect(currentPoolAddress, signer as any);
 
-  await pool.initialize(encodePriceSqrt(1000, 1000));
+  const price = encodePriceSqrt(30, 30);
+  await pool.initialize(price);
 
-  console.info(`Pool initialized with sqrt price of 1000`);
+  console.info(`Pool initialized with sqrt price of ${price}`);
 }
 
 createPool(CurrentConfig.tokens.token0, CurrentConfig.tokens.token1)

@@ -1,3 +1,4 @@
+import assert from "node:assert";
 import { ethers } from "hardhat";
 
 import { CurrencyAmount, Percent, Token } from "@uniswap/sdk-core";
@@ -90,6 +91,7 @@ export async function constructPosition(
 export async function mintPosition(): Promise<any | null> {
   const signer = await ethers.provider.getSigner();
 
+  console.info(`Signer address: ${signer.address}`);
   console.info(`Approving tokens to NFT Position Manager: ${CurrentConfig.managerAddress}`);
 
   // Give approval to the contract to transfer tokens
@@ -98,8 +100,8 @@ export async function mintPosition(): Promise<any | null> {
 
   console.info(`Approved tokens to NFT Position Manager: ${CurrentConfig.managerAddress}`);
 
-  console.assert(tokenInApproval, "TokenIn approval failed");
-  console.assert(tokenOutApproval, "TokenOut approval failed");
+  assert(tokenInApproval, "TokenIn approval failed");
+  assert(tokenOutApproval, "TokenOut approval failed");
 
   const positionToMint = await constructPosition(
     CurrencyAmount.fromRawAmount(
